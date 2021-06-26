@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # batalk-offsite-test
 
 ## Project setup
@@ -25,9 +25,3 @@ yarn run test
 ```
 yarn run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-=======
-# batalk-offsite-test
->>>>>>> 0ae1d2c203849eec76a4a91dee5a8556167b5da8
