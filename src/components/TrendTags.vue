@@ -20,6 +20,7 @@ export default {
       }
       e.target.classList.add('selected');
       this.$store.dispatch('getQuestions', e.target.innerHTML);
+      this.$store.commit('setTarget', e.target.innerHTML)
     }
   },
   computed: {

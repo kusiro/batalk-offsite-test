@@ -1,6 +1,6 @@
 <template>
   <div class="question-list">
-    <div class="question-item" v-for="(question, idx) in questions" :key="idx">
+    <a v-bind:href="question.link" target="_blank" class="question-item" v-for="(question, idx) in questions" :key="idx">
       <h1 class="question-title">{{ question.title }}</h1>
       <div class="question-detail">
         <div class="detail score">
@@ -29,7 +29,7 @@
         </div>
         {{ question.owner.display_name}}
       </div>
-    </div>
+    </a>
   </div>
 </template>
 
@@ -38,6 +38,7 @@ export default {
   name: "QuestionList",
   computed: {
     questions(){
+      console.log(this.$store.getters.showAllQuestion);
       return this.$store.getters.showAllQuestion;
     }
   },
@@ -58,6 +59,8 @@ export default {
       padding: 1em;
       display: flex;
       flex-wrap: wrap;
+      text-decoration: none;
+      color: black;
 
       .question-title {
         font-size: 1em;

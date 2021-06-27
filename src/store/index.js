@@ -11,6 +11,7 @@ export default new Vuex.Store({
     tags: [],
     qusetions: [],
     target: '',
+    page: 1,
   },
   mutations: {
     setTag(state, payload) {
@@ -19,9 +20,15 @@ export default new Vuex.Store({
     setQuestions(state, payload) {
       state.qusetions = payload;
     },
+    addQuestions(state, payload) {
+      state.qusetions = state.qusetions.concat(payload);
+    },
     setTarget(state, value) {
       state.target = value;
-    }
+    },
+    nextPage(state) {
+      state.page += 1;
+    },
   },
   actions: {
     async getTags(state) {
@@ -55,6 +62,24 @@ export default new Vuex.Store({
         },
       }).then(res => {
         state.commit("setQuestions", res.data.items);
+      }).catch(e => {
+        console.log(e);
+      });
+    },
+    async addQuestions(state, target, page) {
+      axios({
+        method: "GET",
+        url: baseURL + "questions",
+        params: {
+          page: page,
+          pagesize: 20,
+          tagged: target,
+          order: 'desc',
+          sort: 'activity',
+          site: 'stackoverflow',
+        },
+      }).then(res => {
+        state.commit("addQuestions", res.data.items);
       }).catch(e => {
         console.log(e);
       });

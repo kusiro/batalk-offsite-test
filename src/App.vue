@@ -13,6 +13,11 @@ import QuestionList from './components/QuestionList.vue';
 
 export default {
   name: 'App',
+  data() {
+    return {
+      isLoading: false,
+    }
+  },
   mounted() {
     this.$store.dispatch('getTags');
     this.$store.dispatch('getQuestions', this.target);
@@ -25,11 +30,24 @@ export default {
       return this.$store.state.target;
     },
   },
+  created () {
+    window.addEventListener("scroll", this.addQuestion);
+  },
   components: {
     SearchBar,
     TrendTags,
     QuestionList,
-  }
+  },
+  methods: {
+    addQuestion() {
+      if (window.scrollY + window.screen.height > document.body.scrollHeight && !this.isLoading) {
+        this.isLoading = true;
+        this.$store.commit('nextPage');
+        this.$store.dispatch('addQuestions', this.$store.state.target, this.$store.state.page);
+        this.isLoading = false;
+      } 
+    },
+  },
 }
 </script>
 
