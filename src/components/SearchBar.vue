@@ -1,12 +1,23 @@
 <template>
   <div class="search-bar">
-    <input type="text" name="" id="">
+    <input v-model="search" @keyup.enter="searchTag" type="text" name="" id="">
   </div>  
 </template>
 
 <script>
 export default {
   name: "SearchBar",
+  data() {
+    return {
+      search: '',
+    }
+  },
+  methods: {
+    searchTag() {
+      this.$store.dispatch('getQuestions', this.search);
+      this.search = '';
+    }
+  },
 }
 </script>
 

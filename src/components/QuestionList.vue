@@ -38,7 +38,6 @@ export default {
   name: "QuestionList",
   computed: {
     questions(){
-      console.log(this.$store.getters.showAllQuestion);
       return this.$store.getters.showAllQuestion;
     }
   },
